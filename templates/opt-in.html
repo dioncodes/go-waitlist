@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style lang="text/css">
+		body {
+			background: #F5F0EB;
+			color: #2A2A2A;
+			padding: 2rem;
+			margin: 0;
+			font-family: 'Inter', -apple-system;
+			font-size: 1rem;
+		}
+
+		header {
+			margin: 0 auto;
+			text-align: left;
+			max-width: 800px;
+		}
+
+		main {
+			background: #fff;
+			margin: 2rem auto;
+			border-radius: 0.5rem;
+			box-shadow: 0 8px 46px rgba(0, 0, 0, .1),  0 2px 6px rgba(0, 0, 0, .03);
+			max-width: 800px;
+			padding: 1.5rem;
+		}
+
+		main *:first-child {
+			margin-top: 0;
+		}
+
+		main *:last-child {
+			margin-bottom: 0;
+		}
+
+		footer {
+			margin: 0 auto;
+			max-width: 800px;
+			color: #aaa;
+			font-size: 0.8rem;
+		}
+
+		a.btn {
+			display: inline-block;
+			background-color: {{.AccentColor}};
+			color: #2A2A2A;
+			padding: 0.75rem 1rem;
+			text-decoration: none;
+			font-size: 0.9rem;
+			font-weight: bold;
+			border-radius: 0.5rem;
+		}
+	</style>
+</head>
+<body>
+<header>
+	<img src="{{.LogoUrl}}" width="150" alt="{{.AppName}} Logo" />
+</header>
+<main>
+	<p>Hey there!</p>
+
+	<p>
+		Just one more step!<br />
+		Click the button below to confirm your spot on the <b>{{.AppName}}</b> waitlist and be the first to know when we launch.
+	</p>
+
+	<p style="margin: 2rem 0;">
+		<a href="{{.Url}}" class="btn">Confirm my spot</a>
+	</p>
+
+	<p>
+		{{.AdditonalText}}
+	</p>
+
+	<p>Thanks for joining us early. Big things are coming.</p>
+
+	<p>
+		Cheers,<br />
+		<b>– The {{.AppName}} Team</b>
+	</p>
+</main>
+<footer>
+	<p style="font-size: 0.75rem; color: #aaa;">
+		If the button above is not working, you can also copy & paste the following URL into your browser:<br />
+		<a href="{{.Url}}" style="color: inherit;">{{.Url}}</a>
+	</p>
+	<p>
+		This is an automated email - please do not reply. If you didn't sign up, you can ignore this email.
+	</p>
+</footer>
+</body>
+</html>
