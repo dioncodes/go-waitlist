@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"html/template"
 	"net/http"
+	"net/mail"
 	"net/url"
 	"os"
 	"time"
@@ -108,7 +109,12 @@ func optIn(c *gin.Context) {
 	var r Request
 
 	if err := c.ShouldBindJSON(&r); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"status": "badRequest"})
+		return
+	}
+
+	if _, err := mail.ParseAddress(r.Email); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"status": "invalidEmail"})
 		return
 	}
 
