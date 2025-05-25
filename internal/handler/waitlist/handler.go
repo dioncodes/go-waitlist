@@ -56,7 +56,11 @@ func signUp(c *gin.Context) {
 	}
 	registration.AdditionalInformation = datatypes.JSON(additionalInfo)
 
-	registration.Save()
+	err = registration.Save()
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"status": "unknownError"})
+		return
+	}
 
 	client := resend.NewClient(os.Getenv("RESEND_API_KEY"))
 
@@ -89,11 +93,9 @@ func signUp(c *gin.Context) {
 	_, err = client.Emails.Send(params)
 	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"status": "emailSendingError"})
-		registration.Delete()
+		_ = registration.Delete()
 		return
 	}
-
-	// fmt.Println(sent.Id)
 
 	c.JSON(http.StatusOK, gin.H{
 		"status": "ok",
@@ -131,7 +133,11 @@ func optIn(c *gin.Context) {
 	}
 
 	registration.Confirmed = true
-	registration.Save()
+	err = registration.Save()
+	if err != nil {
+		c.Status(http.StatusInternalServerError)
+		return
+	}
 
 	c.Status(http.StatusNoContent)
 }
